@@ -5,7 +5,10 @@
   {mod, { bower_app, []}},
   {applications,
    [kernel,
-    stdlib
+    stdlib,
+    lager,
+    cowboy,
+    uuid
    ]},
   {env,[]},
   {modules, []},
