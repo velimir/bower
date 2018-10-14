@@ -6,6 +6,7 @@
  {<<"lager">>,{pkg,<<"lager">>,<<"3.6.6">>},0},
  {<<"quickrand">>,{pkg,<<"quickrand">>,<<"1.7.4">>},1},
  {<<"ranch">>,{pkg,<<"ranch">>,<<"1.6.2">>},1},
+ {<<"spellerl">>,{pkg,<<"spellerl">>,<<"1.0.1">>},0},
  {<<"uuid">>,{pkg,<<"uuid_erl">>,<<"1.7.4">>},0}]}.
 [
 {pkg_hash,[
@@ -16,5 +17,6 @@
  {<<"lager">>, <<"23C8F5ABC4189F46804791E16BF6421C14EBC5B529DC113BC54639C6C62F255D">>},
  {<<"quickrand">>, <<"F91F34469D6AC153B951BB34DD9C78029882426BD61E12B85E5EE465850C08ED">>},
  {<<"ranch">>, <<"6DB93C78F411EE033DBB18BA8234C5574883ACB9A75AF0FB90A9B82EA46AFA00">>},
+ {<<"spellerl">>, <<"D3A445478CE08A7A57D3946905202D05063028B40E807F17ED9D1BB6B93E4C74">>},
  {<<"uuid">>, <<"4EC01367FEDFBAEEB9D9BC88B2D239D42CE5B53AD284741262F86B71EB82FBFA">>}]}
 ].

@@ -15,7 +15,7 @@
 %%====================================================================
 
 start(_StartType, _StartArgs) ->
-    Dispatch = cowboy_router:compile([{'_', [{'_', bower_http, []}]}]),
+    Dispatch = cowboy_router:compile(routes()),
     Env = #{
             env              => #{dispatch => Dispatch},
             stream_handlers  => [bower_log_context_h, cowboy_metrics_h, cowboy_stream_h],
@@ -28,8 +28,15 @@ start(_StartType, _StartArgs) ->
 
 %%--------------------------------------------------------------------
 stop(_State) ->
-    ok.
+    ok = cowboy:stop_listener(?MODULE).
 
 %%====================================================================
 %% Internal functions
 %%====================================================================
+
+routes() ->
+    HostMatch = '_',
+    Paths =
+        [{"/spellerl/v1/spell/:term", bower_spellerl_http, []},
+         {"/", bower_http, []}],
+    [{HostMatch, Paths}].

@@ -1,4 +1,4 @@
--module(bower_SUITE).
+-module(bower_spellerl_SUITE).
 
 -compile(export_all).
 
@@ -64,7 +64,6 @@ end_per_group(_GroupName, _Config) ->
 init_per_testcase(_TestCase, Config) ->
     Config.
 
-
 %%--------------------------------------------------------------------
 %% @spec end_per_testcase(TestCase, Config0) ->
 %%               term() | {save_config,Config1} | {fail,Reason}
@@ -101,19 +100,13 @@ groups() ->
 %% @end
 %%--------------------------------------------------------------------
 all() ->
-    [handle_get_request_test_case].
+    [test_returns_cardinal,
+     test_not_found_for_no_resource,
+     test_non_dig_is_a_bad_type].
 
 %%--------------------------------------------------------------------
 %% Test cases
 %%--------------------------------------------------------------------
-
-%%--------------------------------------------------------------------
-%% @spec TestCase() -> Info
-%% Info = [tuple()]
-%% @end
-%%--------------------------------------------------------------------
-handle_get_request_test_case() ->
-    [].
 
 %%--------------------------------------------------------------------
 %% @spec TestCase(Config0) ->
@@ -124,10 +117,15 @@ handle_get_request_test_case() ->
 %% Comment = term()
 %% @end
 %%--------------------------------------------------------------------
-handle_get_request_test_case(_Config) ->
-    {200, #{hello := <<"world">>}} = bower_ct:request(get, "/").
 
+test_returns_cardinal(_Config) ->
+    {200, #{cardinal := <<"ten">>}} =
+        bower_ct:request(get, "/spellerl/v1/spell/10").
 
-%%--------------------------------------------------------------------
-%% Helper Functions
-%%--------------------------------------------------------------------
+test_not_found_for_no_resource(_Config) ->
+    {404, no_data} =
+        bower_ct:request(get, "/spellerl/v1/spell").
+
+test_non_dig_is_a_bad_type(_Config) ->
+    {404, #{error := <<"not_int">>}} =
+        bower_ct:request(get, "/spellerl/v1/spell/bar").
