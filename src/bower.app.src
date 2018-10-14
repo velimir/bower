@@ -10,7 +10,10 @@
     cowboy,
     uuid
    ]},
-  {env,[]},
+  {env,
+   [{transport,
+     [{port, 8080}]}]},
+
   {modules, []},
 
   {maintainers, []},
