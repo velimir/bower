@@ -1,7 +1,7 @@
 -module(bower_ct).
 
 %% API
--export([start/0, request/2]).
+-export([start/0, request/2, request/3, request/4, request/5]).
 
 %%%===================================================================
 %%% API
@@ -12,8 +12,21 @@ start() ->
 
 
 request(Method, Path) ->
+    request(Method, Path, []).
+
+
+request(Method, Path, Headers) ->
+    request(Method, Path, Headers, <<>>).
+
+
+request(Method, Path, Headers, Body) ->
+    request(Method, Path, Headers, Body, #{}).
+
+
+request(Method0, Path, Headers, Body, ReqOpts) ->
     Connection = connection(),
-    StreamRef = gun:Method(Connection, Path),
+    Method = method(Method0),
+    StreamRef = gun:request(Connection, Method, Path, Headers, Body, ReqOpts),
     await_response(Connection, StreamRef).
 
 %%%===================================================================
@@ -33,3 +46,6 @@ await_response(Connection, StreamRef) ->
         {response, fin, Status, _Headers} ->
             {Status, no_data}
     end.
+
+method(Atom) ->
+    string:uppercase(atom_to_binary(Atom, utf8)).

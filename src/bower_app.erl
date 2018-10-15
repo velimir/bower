@@ -37,6 +37,7 @@ stop(_State) ->
 routes() ->
     HostMatch = '_',
     Paths =
-        [{"/spellerl/v1/spell/:term", bower_spellerl_http, []},
+        [{"/echo/v1", bower_echo_http, []},
+         {"/spellerl/v1/spell/:term", bower_spellerl_http, []},
          {"/", bower_http, []}],
     [{HostMatch, Paths}].
