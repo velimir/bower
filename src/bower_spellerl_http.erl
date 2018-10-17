@@ -2,6 +2,10 @@
 
 -behavior(cowboy_handler).
 
+-ifdef(EUNIT).
+-include_lib("eunit/include/eunit.hrl").
+-endif.
+
 %% API
 -export([init/2]).
 
@@ -45,3 +49,13 @@ cast_int(Binary) when is_binary(Binary) ->
         _:_ ->
             {error, not_int}
     end.
+
+
+-ifdef(EUNIT).
+
+spell_hanlder_test_() ->
+    [
+     ?_assertEqual({404, #{error => not_int}}, spell_hanlder(<<"foobar">>))
+    ].
+
+-endif.
